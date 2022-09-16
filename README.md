@@ -41,7 +41,7 @@
 
 ### Techstack
 
-- [Python](https://python.org/) - website is built with React
+- [Python](https://python.org/) - Quiz Game built with python
 
 <br/>
 

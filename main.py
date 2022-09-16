@@ -1,4 +1,4 @@
-print("\nWelcome To My Quiz Game")
+import os
 
 score = 0
 lives = 3
@@ -6,10 +6,15 @@ questions_answer = ["CPU,central processing unit", "RAM,random access memory",
                     "HDD,hard disk drives", "SSD,solid state drives", "CD-ROM,compact disc read only memory"]
 
 
+def clear_console():
+    os.system('cls||clear')
+
+
 def askReady():
     is_ready = input("\nAre You Ready (y/n)? ").lower()
     if (is_ready == "n"):
-        quit()
+        playGame()
+    clear_console()
 
 
 def rules():
@@ -26,6 +31,8 @@ def askQuestions(item):
         print("\n==================== CORRECT ====================")
         global score
         score += 1
+        input("")
+        clear_console()
     else:
         global lives
         lives -= 1
@@ -36,12 +43,33 @@ def askQuestions(item):
             print("\n================== WRONG!! ==================")
             livesLeft = "\nyou have {} lives left"
             print(livesLeft.format(lives))
+            input("")
+            clear_console()
 
 
-rules()
-askReady()
-for item in questions_answer:
-    askQuestions(item)
+is_quit = False
 
 
-print("your score ", score/len(questions_answer)*100, "%")
+def playGame():
+    global is_quit
+    if is_quit:
+        quit()
+    else:
+        clear_console()
+        print("\nWelcome To My Quiz Game")
+        choice = input(
+            "\n[p] Play\n[q] Quit\nJust Type character (example = p)\n->").lower()
+        if (choice == "q"):
+            is_quit = True
+            playGame()
+        clear_console()
+        rules()
+        askReady()
+        for item in questions_answer:
+            askQuestions(item)
+        print("your score ", score/len(questions_answer)*100, "%")
+        input()
+        playGame()
+
+
+playGame()
